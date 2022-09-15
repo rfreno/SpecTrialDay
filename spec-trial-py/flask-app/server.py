@@ -66,7 +66,7 @@ def get_info():
     # The next line is an explanation of what this function does.
     """Display dino creation form."""
 
-    return "<h1>Read the instructions</h1>"
+    return render_template('form.html')
 
 
 ##### WITHOUT RENDER_TEMPLATE #####
@@ -140,21 +140,26 @@ def get_info():
 @app.route('/dino')
 def display_dino():
     """Display the dino."""
-
+    dino_name = request.args.get("dino-name")
+    age = request.args.get("age")
+    image = request.args.get("dino-pic")
     return f"""
     <!doctype html>
     <html>
       <head>
-        <title>Your Title Here</title>
+        <title>{dino_name} the Dinosaur</title>
         <link rel="stylesheet" href="/static/main.css">
       </head>
       <body>
         <main>
-            <h1>Your HTML Here</h1>
+            <h1>{dino_name}, {age}</h1>
+            <img src="/static/images/{image} alt="dinosaur"/>
+            <a href="/form">Create another dinosaur.</a>
         </main>
       </body>
     </html>
     """
+
 
 ##### WHAT'S THIS DOING #####
 # This route allows us to serve assets from our "static" folder 
